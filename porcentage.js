@@ -3,10 +3,24 @@ const percentage = document.querySelector('#percentage');
 const coupon = document.querySelector('#coupon');
 const btncalculate = document.querySelector('.calculate');
 const result = document.querySelector('.result');
-const couponobj = {
-    name:'Buenazo',
-    discount:20
-}
+// const couponobj = {
+//     'Buenazo':20,
+//     'Causatron':15,
+//     'Mostrazo':10
+// } En la practica se usa lista y no objetos
+const couponlist = [];
+couponlist.push({
+    name:'Mostrazo', discount:20
+});
+couponlist.push({
+    name:'Buenazo', discount:10
+});
+couponlist.push({
+    name:'Chaufon', discount:15
+});
+couponlist.push({
+    name:'Taypa', discount:15
+});
 btncalculate.addEventListener('click',porcentageresult);
 function porcentageresult(){
     const mon = Number(money.value);
@@ -20,24 +34,30 @@ function porcentageresult(){
         result.innerHTML = 'Enter valid values'
         return;
     }
-    // if (!cou){
-    //     result.innerHTML = 'Final cost:' + mon*(1-per/100);
-    // }else{
-    //     switch(cou){
-    //         case 'Causatron':
-    //             if (per+10>100){
-    //                 result.innerHTML = 'The discount is greater than 100%'
-    //             }else{
-    //                 result.innerHTML = 'Final cost:' + mon*(1-(per+10)/100);
-    //             }
-    //             break;
-    //         case 'Chaufon':
-    //             if (per+20>100){
-    //                 result.innerHTML = 'The discount is greater than 100%'
-    //             }else{
-    //                 result.innerHTML = 'Final cost:' + mon*(1-(per+20)/100);
-    //             }
-    //             break;
-    //     }
-    // }
+    function IscouponinArray(couponelement){
+        return couponelement.name == cou;
+    }
+    // const couponinArray = couponlist.filter(couponelement => couponelement.name === cou);
+        const couponinArray = couponlist.filter(IscouponinArray);
+    if (couponinArray.length>0){
+        result.innerHTML = 'Final cost:' + mon*(1-(per+couponinArray[0].discount)/100);
+    }else{
+        result.innerHTML = 'Final cost:' + mon*(1-per/100);
+        // switch(cou){
+        //     case 'Causatron':
+        //         if (per+10>100){
+        //             result.innerHTML = 'The discount is greater than 100%'
+        //         }else{
+        //             result.innerHTML = 'Final cost:' + mon*(1-(per+10)/100);
+        //         }
+        //         break;
+        //     case 'Chaufon':
+        //         if (per+20>100){
+        //             result.innerHTML = 'The discount is greater than 100%'
+        //         }else{
+        //             result.innerHTML = 'Final cost:' + mon*(1-(per+20)/100);
+        //         }
+        //         break;
+        // }
+    }
 }
