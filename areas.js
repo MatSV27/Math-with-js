@@ -22,22 +22,30 @@ function circle(radius){
 // console.log(scalenetriangle(8,8,8));
 // console.log(scalenetriangleheight(16,8,10));
 // console.groupEnd('Triangle');
-const btnperimeter=document.querySelector('.perimeter');
-const btnarea=document.querySelector('.area');
+const btnperimetertriangle=document.querySelector('.perimetertriangle');
+const btnareatriangle=document.querySelector('.areatriangle');
 const side1=document.querySelector('#side1');
 const side2=document.querySelector('#side2');
 const side3=document.querySelector('#side3');
-const result=document.querySelector('.result');
-btnperimeter.addEventListener('click',triangleperimeter);
-btnarea.addEventListener('click',trianglearea);
+const result=document.querySelector('.resulttriangle');
+btnperimetertriangle.addEventListener('click',triangleperimeter);
+btnareatriangle.addEventListener('click',trianglearea);
 function trianglearea(){
     const sideA = parseFloat(side1.value);
     const sideB = parseFloat(side2.value);
     const sideC = parseFloat(side3.value);
     const semiperimeter=(sideA+sideB+sideC)/2;
-    const area=(Math.sqrt(semiperimeter*(semiperimeter-sideA)*(semiperimeter-sideB)*(semiperimeter-sideC)));
+    const area=Math.sqrt(semiperimeter*(semiperimeter-sideA)*(semiperimeter-sideB)*(semiperimeter-sideC));
     if (!sideA || !sideB || !sideC){
         result.innerHTML = 'Complete the sides of the boxes'
+        return;
+    }
+    if (sideA<0 || sideB<0 || sideC<0){
+        result.innerHTML = 'Enter valid data';
+        return;
+    }
+    if (isNaN(area) || area==0){
+        result.innerHTML = "This kind of triangle doesn't exist";
         return;
     }
     result.innerText = 'Area:'+area;
@@ -48,8 +56,17 @@ function triangleperimeter(){
     const sideB = parseFloat(side2.value);
     const sideC = parseFloat(side3.value);
     const perimeter = sideA+sideB+sideC;
+    const semiperimeter = perimeter/2;
     if (!sideA || !sideB || !sideC){
         result.innerHTML = 'Complete the sides of the boxes'
+        return;
+    }
+    if (sideA<0 || sideB<0 || sideC<0){
+        result.innerHTML = 'Enter valid data';
+        return;
+    }
+    if (isNaN(Math.sqrt(semiperimeter*(semiperimeter-sideA)*(semiperimeter-sideB)*(semiperimeter-sideC))) || Math.sqrt(semiperimeter*(semiperimeter-sideA)*(semiperimeter-sideB)*(semiperimeter-sideC))==0){
+        result.innerHTML = "This kind of triangle doesn't exist";
         return;
     }
     result.innerText = 'Perimeter:'+perimeter;
