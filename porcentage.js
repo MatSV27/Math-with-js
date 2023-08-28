@@ -39,10 +39,13 @@ function porcentageresult(){
     }
     // const couponinArray = couponlist.filter(couponelement => couponelement.name === cou);
         const couponinArray = couponlist.filter(IscouponinArray);
+        // const couponinArray = couponlist.find(IscouponinArray);
+    // if (couponinArray) Podemos utilizar el find para hallar al primer elemento que cumpla con la condición, bajo este caso si podemos validar directamente si esta o no en el array
+    // asi como tambien ya no seria necesario ponerle couponinArray[0].discount sino solamentemente couponinArray.discount
     if (couponinArray.length>0){
-        result.innerHTML = 'Final cost:' + mon*(1-(per+couponinArray[0].discount)/100);
+        result.innerHTML = 'Final cost:' + (mon*(1-(per+couponinArray[0].discount)/100)).toFixed(2);
     }else{
-        result.innerHTML = 'Final cost:' + mon*(1-per/100);
+        result.innerHTML = 'Final cost:' + (mon*(1-per/100)).toFixed(2);
         // switch(cou){
         //     case 'Causatron':
         //         if (per+10>100){
