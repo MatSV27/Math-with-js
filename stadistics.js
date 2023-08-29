@@ -17,15 +17,23 @@ actu.addEventListener('click',refresharray);
 // btnmedian.addEventListener('click',medianlist);
 // btnmode.addEventListener('click',modelist);
 function meanlist(){
-    let meanreturn = 0;
-    for (i of lista){
-        meanreturn = meanreturn + Number(i);
-    }
-    result.innerText='Answer:'+meanreturn/lista.length;
+    // let meanreturn = 0;
+    // for (i of lista){
+    //     meanreturn = meanreturn + Number(i);
+    // }
+    // result.innerText='Answer:'+meanreturn/lista.length;
+    const sumlist = lista.reduce(function(acumulatevalue,newvalue){
+        return Number(acumulatevalue)+Number(newvalue);
+    });
+    result.innerText='Answer:'+sumlist/lista.length;
+};
+function medianlist(){
+    const sortarray = lista.sort(a,b => a-b);
+    list.innerText=sortarray;
 }
 function refresharray(){
     lista = [];
     filllist(lista);
     list.innerText=lista;
-}
+};
 list.innerText=lista;
