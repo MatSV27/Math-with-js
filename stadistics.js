@@ -11,7 +11,6 @@ function filllist(lista){
     }
 };
 filllist(lista);
-console.log(lista);
 btnmean.addEventListener('click',meanlist);
 actu.addEventListener('click',refresharray);
 btnmedian.addEventListener('click',medianlist);
@@ -38,11 +37,10 @@ function modelist(){
 };
 function medianlist(){
     const sortedlist = lista.sort(function(a,b){return a-b});
-    console.log(sortedlist);
     if (sortedlist.length%2!=0){
-        result.innerText = 'Answer:' + sortedlist[(sortedlist.length-1)/2];
+        result.innerText = 'Answer:' + Number(sortedlist[(sortedlist.length-1)/2]);
     }else{
-        result.innerText = 'Answer:' + (sortedlist[(sortedlist.length)/2]+sortedlist[(sortedlist.length)/2-1])/2;
+        result.innerText = 'Answer:' + (Number(sortedlist[(sortedlist.length)/2])+Number(sortedlist[(sortedlist.length)/2-1]))/2;
     }
 };
 function meanlist(){
