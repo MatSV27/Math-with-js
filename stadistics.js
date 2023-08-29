@@ -9,23 +9,52 @@ function filllist(lista){
     for (let i=0;i<10;i++){
         lista.push((Math.random()*10).toFixed(0));
     }
-}
+};
 filllist(lista);
 console.log(lista);
 btnmean.addEventListener('click',meanlist);
 actu.addEventListener('click',refresharray);
-// btnmedian.addEventListener('click',medianlist);
-// btnmode.addEventListener('click',modelist);
+btnmedian.addEventListener('click',medianlist);
+btnmode.addEventListener('click',modelist);
+
+function modelist(){
+    let returnlist = {};
+    let max=0;
+    let j;
+    for (i of lista){
+        if (i in returnlist){
+            returnlist[i]+=1;
+        }else{
+            returnlist[i]=1;
+        }
+    }
+    for (var i in returnlist){
+        if (returnlist[i]>max){
+            max=returnlist[i];
+            j=i;
+        }
+    }
+    result.innerText = 'Answer:'+j;
+};
+function medianlist(){
+    const sortedlist = lista.sort(function(a,b){return a-b});
+    console.log(sortedlist);
+    if (sortedlist.length%2!=0){
+        result.innerText = 'Answer:' + sortedlist[(sortedlist.length-1)/2];
+    }else{
+        result.innerText = 'Answer:' + (sortedlist[(sortedlist.length)/2]+sortedlist[(sortedlist.length)/2-1])/2;
+    }
+};
 function meanlist(){
     let meanreturn = 0;
     for (i of lista){
         meanreturn = meanreturn + Number(i);
     }
     result.innerText='Answer:'+meanreturn/lista.length;
-}
+};
 function refresharray(){
     lista = [];
     filllist(lista);
     list.innerText=lista;
-}
+};
 list.innerText=lista;
