@@ -9,13 +9,42 @@ function filllist(lista){
     for (let i=0;i<10;i++){
         lista.push((Math.random()*10).toFixed(0));
     }
-}
+};
 filllist(lista);
 console.log(lista);
 btnmean.addEventListener('click',meanlist);
 actu.addEventListener('click',refresharray);
-// btnmedian.addEventListener('click',medianlist);
-// btnmode.addEventListener('click',modelist);
+btnmedian.addEventListener('click',medianlist);
+btnmode.addEventListener('click',modelist);
+
+function modelist(){
+    let returnlist = {};
+    let max=0;
+    let j;
+    for (i of lista){
+        if (i in returnlist){
+            returnlist[i]+=1;
+        }else{
+            returnlist[i]=1;
+        }
+    }
+    for (var i in returnlist){
+        if (returnlist[i]>max){
+            max=returnlist[i];
+            j=i;
+        }
+    }
+    result.innerText = 'Answer:'+j;
+};
+function medianlist(){
+    const sortedlist = lista.sort(function(a,b){return a-b});
+    console.log(sortedlist);
+    if (sortedlist.length%2!=0){
+        result.innerText = 'Answer:' + sortedlist[(sortedlist.length-1)/2];
+    }else{
+        result.innerText = 'Answer:' + (sortedlist[(sortedlist.length)/2]+sortedlist[(sortedlist.length)/2-1])/2;
+    }
+};
 function meanlist(){
     // let meanreturn = 0;
     // for (i of lista){
@@ -27,10 +56,6 @@ function meanlist(){
     });
     result.innerText='Answer:'+sumlist/lista.length;
 };
-function medianlist(){
-    const sortarray = lista.sort(a,b => a-b);
-    list.innerText=sortarray;
-}
 function refresharray(){
     lista = [];
     filllist(lista);
